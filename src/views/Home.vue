@@ -4,22 +4,27 @@
     <br>
     <v-container>
       <v-row>
-        <v-col cols="12" md="12" xs="12" sm="12" lg="12" align="center" justify="center">
+        <v-col cols="12"  align="center" justify="center">
           <v-img src="../assets/evolutiongym.jpg" max-width="400" max-height="400">
           </v-img>
         </v-col>
+        <v-col cols="12" align="center" justify="center">
+          <v-btn elevation="7" x-large block>Ingresar</v-btn>
+        </v-col>
       </v-row>
     </v-container>
+    <Footer />
   </div>
 </template>
 
 <script>
   import Navbar from '../components/Navbar.vue'
+  import Footer from '../components/Footer.vue'
   export default {
     name: 'Home',
 
     components: {
-      Navbar
+      Navbar, Footer
     },
   }
 </script>
