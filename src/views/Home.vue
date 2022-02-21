@@ -9,7 +9,7 @@
           </v-img>
         </v-col>
         <v-col cols="12" align="center" justify="center">
-          <v-btn elevation="7" x-large block>Ingresar</v-btn>
+          <v-btn elevation="7" x-large block :to="{name: 'Log-in'}">Ingresar</v-btn>
         </v-col>
       </v-row>
     </v-container>
