@@ -1,3 +1,4 @@
-/* export default () => {
-
-} */
+export default () => ({
+    students: null,
+    isLoading: null
+}) 
