@@ -1,24 +1,26 @@
 <template>
   <div>
         <Navbar />
-        
-        <h1>Lista</h1>
+        <hr>
+        <h1 class="text-center">Listado de alumnos</h1>
+
+        <Modal/>
+
+
         <v-simple-table>
             <template v-slot:default>
                 <thead>
                     <tr>
-                    <th class="text-left">
+                    <th class="text-center">
                         Rut
                     </th>
-                    <th class="text-left">
+                    <th class="text-center">
                         Nombre
                     </th>
-                    <th class="text-left">
-                        Editar
+                    <th class="text-center">
+                        Gestion
                     </th>
-                    <th class="text-left">
-                        Eliminar
-                    </th>
+                    
                     </tr>
                 </thead>
                 <tbody>
@@ -26,14 +28,13 @@
                     v-for="item in students"
                     :key="item.id"
                     >
-                    <td>{{ item.rut }}</td>
-                    <td>{{ item.name }} {{ item.lastname }}</td>
-                    <td>
-                        <v-btn color="yellow accent-3" >Editar</v-btn>
-                    </td>
-                    <td>
-                        <v-btn color="red accent-3" >Eliminar</v-btn>
-                    </td>
+                        <td class="text-center">{{ item.rut }}</td>
+                        <td class="text-center">{{ item.name }} {{ item.lastname }}</td>
+                        <td class="text-center">
+                            <v-btn x-small color="yellow darken-1" >Editar</v-btn> |
+                            <v-btn x-small color="red darken-1" >Eliminar</v-btn> |
+                            <v-btn x-small color="blue darken-1" >Detalles</v-btn>
+                        </td>
                     
                     </tr>
                 </tbody>
@@ -51,6 +52,7 @@ export default {
     components: {
         Navbar: () => import('../components/Navbar.vue'),
         Footer: () => import('../components/Footer.vue'),
+        Modal: () => import('../components/Modal.vue'),
     },
     created() {
         this.$store.dispatch('students/getStudents')
