@@ -29,10 +29,9 @@
                     :key="item.id"
                     >
                         <td class="text-center">{{ item.rut }}</td>
-                        <td class="text-center">{{ item.name }} {{ item.lastname }}</td>
+                        <td class="text-center">{{ item.name }} {{ item.fatherLastName }} {{item.motherLastName}} </td>
                         <td class="text-center">
-                            <v-btn x-small color="yellow darken-1" >Editar</v-btn> |
-                            <v-btn x-small color="red darken-1" >Eliminar</v-btn> |
+                            <v-btn x-small color="red darken-1" @click="deleteStudent(item.id)" >Eliminar</v-btn> |
                             <v-btn x-small color="blue darken-1" >Detalles</v-btn>
                         </td>
                     
@@ -46,7 +45,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 export default {
     components: {
@@ -60,7 +59,12 @@ export default {
 
     computed: {
         ...mapState('students', ['students'])
+    },
+
+    methods: {
+        ...mapActions('students', ['deleteStudent'])
     }
+
 }
 </script>
 
