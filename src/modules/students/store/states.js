@@ -1,4 +1,5 @@
 export default () => ({
     students: [],
-    isLoading: null
+    isLoading: null,
+    details: null
 }) 
