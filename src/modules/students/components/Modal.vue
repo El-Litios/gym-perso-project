@@ -20,7 +20,7 @@
             Formulario
           </v-card-title>
 
-          <form @submit.prevent="createStudent(student)">
+          <v-form @submit.prevent="createStudent(student)" lazy-validation ref="form" v-model="valid">
 
             <v-card-text>
             
@@ -68,6 +68,7 @@
               <v-text-field
                 label="Teléfono"
                 :rules="phoneRules"
+                type="phone"
                 hide-details="auto"
                 v-model="student.phone"
               ></v-text-field>
@@ -82,13 +83,14 @@
                 type="submit"
                 color="primary"
                 text
-                @click="dialog = false"
+                @click="validate"
+                :disabled="!valid"
               >
                 I accept
               </v-btn>
             </v-card-actions>
 
-          </form>
+          </v-form>
 
         </v-card>
       </v-dialog>
@@ -102,6 +104,7 @@ export default {
       return {
           dialog: false,
           student: {},
+          valid: true,
 
           //RULES
           rutRules: [
@@ -120,13 +123,18 @@ export default {
             value => (value || '').length <= 25 || 'Máximo 25 caracteres',
           ],
           phoneRules: [
-            value => !!value || 'Debe ingresar el telefono.'
+            value => !!value || 'Debe ingresar el telefono.',
+            value => (value || '').length > 8 && (value || '').length < 10 || 'Debe ingresar 9 dígitos'
           ]
       }
   },
 
   methods: {
-    ...mapActions('students', ['createStudent'])
+    ...mapActions('students', ['createStudent']),
+
+    validate () {
+      this.$refs.form.validate()
+    },
   }
 }
 </script>
