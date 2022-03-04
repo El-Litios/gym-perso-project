@@ -31,8 +31,8 @@
                         <td class="text-center">{{ item.rut }}</td>
                         <td class="text-center">{{ item.name }} {{ item.fatherLastName }} {{item.motherLastName}} </td>
                         <td class="text-center">
-                            <v-btn x-small color="red darken-1" @click="deleteStudent(item.id)" >Eliminar</v-btn> |
-                            <v-btn x-small color="blue darken-1" >Detalles</v-btn>
+                            <v-btn x-small color="red darken-1" class="white--text"  @click="confirm(); deleteStudent(item.id);" >Eliminar</v-btn> |
+                            <v-btn x-small color="blue darken-1" class="white--text" @click="$router.push({ name: 'StudentDetails', params: { id: item.id } })">Detalles</v-btn>
                         </td>
                     
                     </tr>
@@ -53,8 +53,9 @@ export default {
         Footer: () => import('../components/Footer.vue'),
         Modal: () => import('../components/Modal.vue'),
     },
+
     created() {
-        this.$store.dispatch('students/getStudents')
+        this.getStudents()
     },
 
     computed: {
@@ -62,7 +63,11 @@ export default {
     },
 
     methods: {
-        ...mapActions('students', ['deleteStudent'])
+        ...mapActions('students', ['deleteStudent', 'getStudents']),
+
+        confirm(){
+            return confirm('Desea borrar el registro?')
+        }
     }
 
 }
