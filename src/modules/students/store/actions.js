@@ -38,3 +38,17 @@ export const deleteStudent = async({commit, rootState}, id) => {
     })
     .catch(err => console.log(err))
 }
+
+export const getDetails = async({commit , rootState}, id) => {
+    const details = []
+    await db.collection(`${rootState.auth.user}/Userdata/students/${id}/changes`).get()
+    .then(res => {
+        res.forEach(doc => {
+            let data = doc.data()
+            data.id = doc.id
+            details.push(data)
+        })
+        commit('setDetailsByStudentId', details)
+    })
+    .catch(err => console.log(err))
+}
