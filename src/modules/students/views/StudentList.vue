@@ -51,7 +51,7 @@ export default {
     components: {
         Navbar: () => import('../components/Navbar.vue'),
         Footer: () => import('../components/Footer.vue'),
-        Modal: () => import('../components/Modal.vue'),
+        Modal: () => import('../components/ModalAddStudent.vue'),
     },
 
     created() {
