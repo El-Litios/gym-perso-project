@@ -23,7 +23,8 @@ export const createStudent = async ({rootState}, student) => {
         name: student.name,
         fatherLastName: student.flname,
         motherLastName: student.mlname,
-        phone: student.phone
+        phone: student.phone,
+        birthdate: student.birthdate
     })
     .then(() => {
         router.go()
