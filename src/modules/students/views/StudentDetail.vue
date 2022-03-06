@@ -2,6 +2,7 @@
   <div>
         <Navbar/>
         <h1>Detalles</h1>
+        <Modal/>
         <div v-if="details">
             <div v-for="item in details" :key="item.id">
                 ID: {{item.id}} - GRASA: {{item.grasa}} - FECHA: {{item.date}}
@@ -27,6 +28,7 @@ export default {
     components: {
         Navbar: () => import('../components/Navbar.vue'),
         Footer: () => import('../components/Footer.vue'),
+        Modal: () => import('../components/ModalAddChanges.vue'),
     },
 
     methods: {
