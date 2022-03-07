@@ -39,7 +39,7 @@
               <!-- Weight -->
               <v-text-field
                 label="Peso"
-                :rules="weigth"
+                :rules="weigthRules"
                 hide-details="auto"
                 v-model="details.weight"
               ></v-text-field>
@@ -49,7 +49,7 @@
               <!-- Birthdate -->
               <v-text-field
                 label="Fecha de Hoy"
-                :rules="bdRules"
+                :rules="dateRules"
                 hide-details="auto"
                 v-model="details.date"
                 type="date"
@@ -88,30 +88,22 @@ export default {
           valid: true,
 
           //RULES
+          dateRules: [
+            value => !!value || 'Debe ingresar la fecha.'
+          ],
           heightRules: [
-            value => !!value || 'Debe ingresar el rut.',
+            value => !!value || 'Debe ingresar la altura.',
           ],
-          nameRules: [
-            value => !!value || 'Debe ingresar el nombre.',
-            value => (value || '').length <= 25 || 'Máximo 25 caracteres',
+          weigthRules: [
+            value => !!value || 'Debe ingresar el peso.',
           ],
-          flRules: [
-            value => !!value || 'Debe ingresar el apellido paterno.',
-            value => (value || '').length <= 25 || 'Máximo 25 caracteres',
-          ],
-          mlRules: [
-            value => !!value || 'Debe ingresar el apellido materno.',
-            value => (value || '').length <= 25 || 'Máximo 25 caracteres',
-          ],
-          bdRules: [
-            value => !!value || 'Debe ingresar la fecha de nacimiento',
-
-          ],
-          phoneRules: [
-            value => !!value || 'Debe ingresar el telefono.',
-            value => (value || '').length > 8 && (value || '').length < 10 || 'Debe ingresar 9 dígitos'
-          ]
     }
+  },
+
+  methods: {
+    validate () {
+      this.$refs.form.validate()
+    },
   }
 }
 </script>
