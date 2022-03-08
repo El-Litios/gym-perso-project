@@ -70,7 +70,8 @@
                 :rules="bdRules"
                 hide-details="auto"
                 v-model="student.birthdate"
-                type="date"
+                type="text"
+                onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'"
               ></v-text-field>
 
               <v-spacer></v-spacer>
@@ -150,6 +151,14 @@ export default {
     validate () {
       this.$refs.form.validate()
     },
+  },
+
+  computed: {
+    
   }
 }
 </script>
+
+<style lang="css" scoped >
+  
+</style>
