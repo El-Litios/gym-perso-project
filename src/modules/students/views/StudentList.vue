@@ -31,7 +31,7 @@
                         <td class="text-center">{{ item.rut }}</td>
                         <td class="text-center">{{ item.name }} {{ item.fatherLastName }} {{item.motherLastName}} </td>
                         <td class="text-center">
-                            <v-btn x-small color="red darken-1" class="white--text"  @click="confirm(); deleteStudent(item.id);" >Eliminar</v-btn> |
+                            <v-btn x-small color="red darken-1" class="white--text"  @click="deleteStudents(item.id);" >Eliminar</v-btn> |
                             <v-btn x-small color="blue darken-1" class="white--text" @click="$router.push({ name: 'StudentDetails', params: { id: item.id } })">Detalles</v-btn>
                         </td>
                     
@@ -46,6 +46,7 @@
 
 <script>
 import {mapActions, mapState} from 'vuex'
+import Swal from 'sweetalert2'
 
 export default {
     components: {
@@ -65,8 +66,26 @@ export default {
     methods: {
         ...mapActions('students', ['deleteStudent', 'getStudents']),
 
-        confirm(){
-            return confirm('Desea borrar el registro?')
+        async deleteStudents(id){
+            const alert = await Swal.fire({
+                title: 'Estás seguro de borrar el registro?',
+                text: 'Al ser borrado, no hay vuelta atras!',
+                showDenyButton: true,
+                confirmButtonText: 'Aceptar'
+            })
+            
+            if (alert.isConfirmed) {
+                new Swal({
+                    title: 'Un momento...',
+                    allowOutsideClick: false
+                })
+
+                Swal.showLoading()
+
+                this.deleteStudent(id)
+
+                Swal.fire('Registro Borrado', '', 'success')
+            }
         }
     }
 
