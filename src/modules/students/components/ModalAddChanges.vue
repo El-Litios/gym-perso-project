@@ -106,7 +106,7 @@
                 type="submit"
                 color="primary"
                 text
-                @click="validate, saveChange()"
+                @click="validate"
                 :disabled="!valid"
               >
                 Agregar Cambios
