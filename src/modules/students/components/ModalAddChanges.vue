@@ -20,7 +20,7 @@
             Formulario
           </v-card-title>
 
-          <v-form @submit.prevent="" lazy-validation ref="form" v-model="valid">
+          <v-form @submit.prevent="saveChange()" lazy-validation ref="form" v-model="valid">
 
             <v-card-text>
             
@@ -29,30 +29,71 @@
                 label="Estatura"
                 :rules="heightRules"
                 hide-details="auto"
-                v-model="details.height"
+                v-model="changes.height"
                 type="number"
                 step=".1"
               ></v-text-field>
 
-              <v-spacer></v-spacer>
 
               <!-- Weight -->
               <v-text-field
                 label="Peso"
                 :rules="weigthRules"
                 hide-details="auto"
-                v-model="details.weight"
+                v-model="changes.weight"
+                type="number"
+                step=".1"
               ></v-text-field>
 
-              <v-spacer></v-spacer>
-              
-              <!-- Birthdate -->
+             
+              <!-- Biceps -->
               <v-text-field
-                label="Fecha de Hoy"
-                :rules="dateRules"
+                label="Pliege biceps (mm)"
+                :rules="bicepsRules"
                 hide-details="auto"
-                v-model="details.date"
-                type="date"
+                v-model="biceps"
+                type="number"
+                step=".1"
+              ></v-text-field>
+
+              <!-- Triceps -->
+              <v-text-field
+                label="Pliege triceps (mm)"
+                :rules="tricepsRules"
+                hide-details="auto"
+                v-model="triceps"
+                type="number"
+                step=".1"
+              ></v-text-field>
+
+              <!-- Suprailiac -->
+              <v-text-field
+                label="Pliege suprailiaco (mm)"
+                :rules="suprailiacRules"
+                hide-details="auto"
+                v-model="suprailiac"
+                type="number"
+                step=".1"
+              ></v-text-field>
+
+              <!-- Suprailiac -->
+              <v-text-field
+                label="Pliege subescapular (mm)"
+                :rules="suprailiacRules"
+                hide-details="auto"
+                v-model="subscapular"
+                type="number"
+                step=".1"
+              ></v-text-field>
+              
+              <!-- Change Date -->
+              <v-text-field
+                label="Fecha de avance"
+                :rules="cdRules"
+                hide-details="auto"
+                v-model="changes.changedate"
+                type="text"
+                onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'"
               ></v-text-field>
 
             </v-card-text>
@@ -65,45 +106,99 @@
                 type="submit"
                 color="primary"
                 text
-                @click="validate"
+                @click="validate, saveChange()"
                 :disabled="!valid"
               >
                 Agregar Cambios
               </v-btn>
             </v-card-actions>
-
           </v-form>
-
         </v-card>
       </v-dialog>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import getDurninConstants from '../helpers/getDurninConstants'
+
 export default {
+  props: {
+    age: {
+      type: Number,
+      required: true
+    },
+    gender: {
+      required: true
+    },
+    idStudent: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
           details: {},
           dialog: false,    
           valid: true,
+          changes: {},
+          biceps: null,
+          triceps: null,
+          suprailiac: null,
+          subscapular: null,
 
           //RULES
-          dateRules: [
-            value => !!value || 'Debe ingresar la fecha.'
-          ],
           heightRules: [
             value => !!value || 'Debe ingresar la altura.',
           ],
           weigthRules: [
             value => !!value || 'Debe ingresar el peso.',
           ],
+          cdRules: [
+            value => !!value || 'Debe ingresar la fecha.',
+          ],
+          bicepsRules: [
+            value => !!value || 'Debe ingresar el pliege de biceps.',
+          ],
+          tricepsRules: [
+            value => !!value || 'Debe ingresar el pliege de triceps.',
+          ],
+          subscapularRules: [
+            value => !!value || 'Debe ingresar el pliege del subescapular.',
+          ],
+          suprailiacRules: [
+            value => !!value || 'Debe ingresar el pliege del suprailiaco.',
+          ],
     }
   },
 
   methods: {
+    ...mapActions('students', ['createNewChange']),
+
     validate () {
       this.$refs.form.validate()
     },
+
+    saveChange(){
+      const imc = this.changes.weight / (this.changes.height * this.changes.height)
+      const C = this.setDurninConstants.constantC
+      const M = this.setDurninConstants.constantM
+      const sum = parseFloat(this.biceps) + parseFloat(this.triceps) + parseFloat(this.subscapular) + parseFloat(this.suprailiac)
+      const corporalDensity = C - (M * Math.log10(sum))
+      this.changes.imc = Number(imc.toFixed(2));
+      this.changes.bodydensity = Number(corporalDensity.toFixed(4));
+      this.changes.idStudent = this.idStudent
+      
+      this.createNewChange(this.changes)
+    }
+
+  },
+  computed: {
+    setDurninConstants(){
+      const constants =  getDurninConstants(this.gender, this.age)
+      
+      return constants
+    }
   }
 }
 </script>
