@@ -12,7 +12,6 @@ export const unsetStudentAfterDelete = (state, payload) => {
 }
 
 export const setDetailsByStudentId = (state, payload) => {
-    if (!payload) {
-        state.details = payload
-    }
+    state.details = payload
+    
 } 
