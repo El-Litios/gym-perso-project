@@ -60,7 +60,7 @@ export const deleteStudent = async({commit, rootState}, id) => {
 
 export const getDetails = async({commit , rootState}, id) => {
     const details = []
-    await db.collection(`${rootState.auth.user}/Userdata/students/${id}/changes`).get()
+    await db.collection(`${rootState.auth.user}/Userdata/students/${id}/changes`).orderBy("changedate","desc").get()
     .then(res => {
         res.forEach(doc => {
             let data = doc.data()
