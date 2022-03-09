@@ -16,6 +16,22 @@ export const getStudents = async ({commit,  rootState}) => {
         .catch(err => console.log(err))
 } 
 
+export const getStudentById = async ({commit, rootState}, id) => {
+    await db.collection(`${rootState.auth.user}/Userdata/students`).doc(id).get()
+        .then(res => {
+            const student = {
+                rut: res.data().rut,
+                name: res.data().name,
+                fatherLastName: res.data().fatherLastName,
+                motherLastName: res.data().motherLastName,
+                birthdate: res.data().birthdate,
+                phone: res.data().phone
+            }
+            commit('setStudentById', student)
+        })
+        .catch(err => console.log(err))
+}
+
 
 export const createStudent = async ({rootState}, student) => {
     await db.collection(`${rootState.auth.user}/Userdata/students`).add({
@@ -24,7 +40,7 @@ export const createStudent = async ({rootState}, student) => {
         fatherLastName: student.flname,
         motherLastName: student.mlname,
         phone: student.phone,
-        birthdate: student.birthdate
+        birthdate: student.birthdate,
     })
     .then(() => {
         router.go()
