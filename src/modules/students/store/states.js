@@ -1,8 +1,6 @@
 export default () => ({
     students: [],
-    student: {
-        
-    },
+    student: {},
     isLoading: null,
     details: null
 }) 
