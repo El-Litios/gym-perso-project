@@ -25,7 +25,8 @@ export const getStudentById = async ({commit, rootState}, id) => {
                 fatherLastName: res.data().fatherLastName,
                 motherLastName: res.data().motherLastName,
                 birthdate: res.data().birthdate,
-                phone: res.data().phone
+                phone: res.data().phone,
+                gender: res.data().gender
             }
             commit('setStudentById', student)
         })
@@ -41,6 +42,7 @@ export const createStudent = async ({rootState}, student) => {
         motherLastName: student.mlname,
         phone: student.phone,
         birthdate: student.birthdate,
+        gender: student.gender
     })
     .then(() => {
         router.go()
@@ -68,4 +70,19 @@ export const getDetails = async({commit , rootState}, id) => {
         commit('setDetailsByStudentId', details)
     })
     .catch(err => console.log(err))
+}
+
+export const createNewChange = async({commit, rootState}, obj) => {
+    await db.collection(`${rootState.auth.user}/Userdata/students/${obj.idStudent}/changes`).add({
+        weight: obj.weight,
+        height: obj.height,
+        changedate: obj.changedate,
+        bodydensity: obj.bodydensity,
+        imc: obj.imc,
+    })
+    .then(() => {
+        router.go()
+    })
+    .catch(err => console.log(err))
+    
 }
