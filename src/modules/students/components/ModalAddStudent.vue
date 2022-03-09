@@ -32,7 +32,6 @@
                 v-model="student.rut"
               ></v-text-field>
 
-              <v-spacer></v-spacer>
 
               <!-- Name -->
               <v-text-field
@@ -42,7 +41,6 @@
                 v-model="student.name"
               ></v-text-field>
 
-              <v-spacer></v-spacer>
 
               <!-- Father Lastname -->
               <v-text-field
@@ -52,7 +50,6 @@
                 v-model="student.flname"
               ></v-text-field>
 
-              <v-spacer></v-spacer>
 
               <!-- Mother Lastname -->
               <v-text-field
@@ -62,7 +59,6 @@
                 v-model="student.mlname"
               ></v-text-field>
 
-              <v-spacer></v-spacer>
 
               <!-- Birthdate -->
               <v-text-field
@@ -74,7 +70,6 @@
                 onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'"
               ></v-text-field>
 
-              <v-spacer></v-spacer>
               
               <!-- Phone -->
               <v-text-field
@@ -84,6 +79,14 @@
                 hide-details="auto"
                 v-model="student.phone"
               ></v-text-field>
+
+              <!-- Gender -->
+              <v-select
+                :items="genderItems"
+                label="Sexo"
+                :rules="genderRules"
+                v-model="student.gender"
+              ></v-select>
 
             </v-card-text>
 
@@ -117,6 +120,7 @@ export default {
           dialog: false,
           student: {},
           valid: true,
+          genderItems: ['Maculino', 'Femenino'],
 
           //RULES
           rutRules: [
@@ -141,7 +145,10 @@ export default {
           phoneRules: [
             value => !!value || 'Debe ingresar el telefono.',
             value => (value || '').length > 8 && (value || '').length < 10 || 'Debe ingresar 9 dígitos'
-          ]
+          ],
+          genderRules: [
+            value => !!value || 'Debe ingresar el sexo.',
+          ],
       }
   },
 
