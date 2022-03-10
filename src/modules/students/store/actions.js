@@ -86,3 +86,11 @@ export const createNewChange = async({commit, rootState}, obj) => {
     .catch(err => console.log(err))
     
 }
+
+export const deleteChange = async({commit, rootState}, obj) => {
+    await db.collection(`${rootState.auth.user}/Userdata/students/${obj.idStudent}/changes`).doc(obj.idChange).delete()
+    .then(() => {
+        commit('unsetCahngeAfterDelete', obj.idChange)
+    })
+    .catch(err => console.log(err))
+}
