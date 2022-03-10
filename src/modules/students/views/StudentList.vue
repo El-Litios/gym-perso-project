@@ -82,7 +82,7 @@ export default {
 
                 Swal.showLoading()
 
-                this.deleteStudent(id)
+                await this.deleteStudent(id)
 
                 Swal.fire('Registro Borrado', '', 'success')
             }
