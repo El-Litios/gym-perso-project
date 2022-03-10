@@ -15,3 +15,7 @@ export const setDetailsByStudentId = (state, payload) => {
     state.details = payload
     
 } 
+
+export const unsetCahngeAfterDelete = (state, payload) => {
+    state.details = state.details.filter(d => d.id !== payload)
+}
