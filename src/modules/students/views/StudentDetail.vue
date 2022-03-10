@@ -20,10 +20,12 @@
                     color="grey lighten-5"
                     elevation="11"
                 >
-                    <v-card-title class="text-h5 text-center">
+                    <v-card-title class="text-h6 text-center">
                         Fecha: {{item.changedate}}
                     </v-card-title>
-                        <div class="d-flex justify-space-around mb-6">
+                        
+                    <v-card-subtitle class="text-center">
+                        <div class="d-flex justify-space-around mb-6 ">
                             <h4><b>Estatura:</b> {{item.height}}</h4>
                             <h4><b>Peso:</b> {{item.weight}}</h4>
                             <h4><b>IMC:</b> {{item.imc}}</h4>
@@ -32,8 +34,6 @@
                             <h4><b>Densidad corporal:</b> {{item.bodydensity}}</h4>
                             <h4><b>Situación:</b> {{setInterval(item.imc)}}</h4>
                         </div>
-                    <v-card-subtitle>
-
                     </v-card-subtitle>
 
                     <v-card-actions style="justify-content: center">
