@@ -14,33 +14,56 @@
 
         <Modal :idStudent="id" :age="setAgeFromDate" :gender="student.gender"/>
         <br>
-        <div v-if="details">
+        <v-container>
             <div v-for="item in details" :key="item.id">
-                <h5 class="text-center">
-                    <b>IMC: </b> {{item.imc}} |
-                    <b>Densidad Corporal: </b> {{item.bodydensity}} |
-                    <b>Situación: </b> {{setInterval(item.imc)}} | 
-                    <b>Fecha: </b> {{item.changedate}} | 
-                    <b>Estatura: </b> {{item.height}} |
-                    <b>Peso: </b> {{item.weight}} |
-                    
-                </h5>
+                <v-card
+                    color="grey lighten-5"
+                    elevation="11"
+                >
+                    <v-card-title class="text-h5 text-center">
+                        Fecha: {{item.changedate}}
+                    </v-card-title>
+                        <div class="d-flex justify-space-around mb-6">
+                            <h4><b>Estatura:</b> {{item.height}}</h4>
+                            <h4><b>Peso:</b> {{item.weight}}</h4>
+                            <h4><b>IMC:</b> {{item.imc}}</h4>
+                        </div>
+                        <div class="d-flex justify-space-around mb-6">
+                            <h4><b>Densidad corporal:</b> {{item.bodydensity}}</h4>
+                            <h4><b>Situación:</b> {{setInterval(item.imc)}}</h4>
+                        </div>
+                    <v-card-subtitle>
+
+                    </v-card-subtitle>
+
+                    <v-card-actions style="justify-content: center">
+                        <v-btn text color="red" elevation="1" @click="saveDelete(item.id)">
+                            Borrar
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+                <br>
             </div>
-        </div>
-        <div v-else>
-            <h1 class="text-center">No hay nada</h1>
-        </div>
+        </v-container>
         <Footer/>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import Swal from 'sweetalert2'
+
 export default {
     props: {
         id: {
             type: String,
             required: true
+        }
+    },
+
+    data () {
+        return {
+            obj: {}
         }
     },
 
@@ -51,28 +74,53 @@ export default {
     },
 
     methods: {
-        ...mapActions('students', ['getStudentById','getDetails']),
+        ...mapActions('students', ['getStudentById','getDetails','deleteChange']),
 
         setInterval(imc){
             switch(true){
                 case imc < 16:
                     return 'Ingreso Médico'
-                case imc >= 16 && imc <= 16.9:
+                case imc >= 16 && imc <= 16.99:
                     return 'Infrapeso'
                 case imc >= 17 && imc <= 18.4:
                     return 'Bajo de peso'
-                case imc >= 18.5 && imc <= 24.9:
+                case imc >= 18.5 && imc <= 24.99:
                     return 'Saludable'
-                case imc >= 25 && imc <= 29.9:
+                case imc >= 25 && imc <= 29.99:
                     return 'Sobrepeso'
-                case imc >= 30 && imc <= 34.9:
+                case imc >= 30 && imc <= 34.99:
                     return 'Sobrepeso Crónico (Obesidad 1°)'
-                case imc >= 35 && imc <= 39.9:
+                case imc >= 35 && imc <= 39.99:
                     return 'Obesidad Premórbida (Obesidad 2°)'
                 case imc >= 40 && imc <= 45:
                     return 'Obesidad Mórbida (Obesidad 3°)'
                 case imc > 45:
                     return 'Obesidad Hipermórbida (Obesidad 4°)'
+            }
+        },
+
+        async saveDelete(idChange){
+            const alert = await Swal.fire({
+                title: 'Estás seguro de borrar el registro?',
+                text: 'Al ser borrado, no hay vuelta atras!',
+                showDenyButton: true,
+                confirmButtonText: 'Aceptar'
+            })
+            
+            if (alert.isConfirmed) {
+                new Swal({
+                    title: 'Un momento...',
+                    allowOutsideClick: false
+                })
+
+                Swal.showLoading()
+
+                this.obj.idStudent = this.id 
+                this.obj.idChange = idChange
+
+               await this.deleteChange(this.obj)
+
+                Swal.fire('Registro Borrado', '', 'success')
             }
         }
     },
