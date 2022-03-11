@@ -185,8 +185,9 @@ export default {
       const M = this.setDurninConstants.constantM
       const sum = parseFloat(this.biceps) + parseFloat(this.triceps) + parseFloat(this.subscapular) + parseFloat(this.suprailiac)
       const corporalDensity = C - (M * Math.log10(sum))
+      const averageFat = (495 / corporalDensity) - 450
       this.changes.imc = Number(imc.toFixed(2));
-      this.changes.bodydensity = Number(corporalDensity.toFixed(4));
+      this.changes.averagefat = Math.round(averageFat)
       this.changes.idStudent = this.idStudent
       
       this.createNewChange(this.changes)
