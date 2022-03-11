@@ -77,7 +77,7 @@ export const createNewChange = async({commit, rootState}, obj) => {
         weight: obj.weight,
         height: obj.height,
         changedate: obj.changedate,
-        bodydensity: obj.bodydensity,
+        averagefat: obj.averagefat,
         imc: obj.imc,
     })
     .then(() => {
