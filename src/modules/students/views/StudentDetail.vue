@@ -12,7 +12,11 @@
             <h4><b>Teléfono: </b> {{student.phone}}</h4>
         </div>
 
-        <Modal :idStudent="id" :age="setAgeFromDate" :gender="student.gender"/>
+        <div class="d-flex justify-center mb-6">
+            <Modal :idStudent="id" :age="setAgeFromDate" :gender="student.gender"/> ||| 
+            <ModalTable :gender="student.gender"/>
+        </div>
+
         <br>
         <v-container>
             <div v-for="item in details" :key="item.id">
@@ -31,7 +35,7 @@
                             <h4><b>IMC:</b> {{item.imc}}</h4>
                         </div>
                         <div class="d-flex justify-space-around mb-6">
-                            <h4><b>Densidad corporal:</b> {{item.bodydensity}}</h4>
+                            <h4><b>% de grasa:</b> {{item.averagefat}}</h4>
                             <h4><b>Situación:</b> {{setInterval(item.imc)}}</h4>
                         </div>
                     </v-card-subtitle>
@@ -71,6 +75,7 @@ export default {
         Navbar: () => import('../components/Navbar.vue'),
         Footer: () => import('../components/Footer.vue'),
         Modal: () => import('../components/ModalAddChanges.vue'),
+        ModalTable: () => import('../components/ModalShowTable.vue'),
     },
 
     methods: {
