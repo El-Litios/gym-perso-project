@@ -1,5 +1,5 @@
 const getDurninConstants = (gender, age) => {
-    if (gender === 'Maculino') {
+    if (gender === 'Masculino') {
         switch (true){
             //16-19 years old
           case age >=16 && age <=19:
