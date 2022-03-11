@@ -120,7 +120,7 @@ export default {
           dialog: false,
           student: {},
           valid: true,
-          genderItems: ['Maculino', 'Femenino'],
+          genderItems: ['Masculino', 'Femenino'],
 
           //RULES
           rutRules: [
