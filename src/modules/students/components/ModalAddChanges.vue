@@ -26,7 +26,7 @@
             
               <!-- Height -->
               <v-text-field
-                label="Estatura"
+                label="Estatura (mts) ej: 1.80"
                 :rules="heightRules"
                 hide-details="auto"
                 v-model="changes.height"
@@ -37,7 +37,7 @@
 
               <!-- Weight -->
               <v-text-field
-                label="Peso"
+                label="Peso (Kg) ej: 90.5"
                 :rules="weigthRules"
                 hide-details="auto"
                 v-model="changes.weight"
@@ -48,7 +48,7 @@
              
               <!-- Biceps -->
               <v-text-field
-                label="Pliege biceps (mm)"
+                label="Pliege biceps (mm) ej: 3.5"
                 :rules="bicepsRules"
                 hide-details="auto"
                 v-model="biceps"
@@ -58,7 +58,7 @@
 
               <!-- Triceps -->
               <v-text-field
-                label="Pliege triceps (mm)"
+                label="Pliege triceps (mm) ej: 7.8"
                 :rules="tricepsRules"
                 hide-details="auto"
                 v-model="triceps"
@@ -68,7 +68,7 @@
 
               <!-- Suprailiac -->
               <v-text-field
-                label="Pliege suprailiaco (mm)"
+                label="Pliege suprailiaco (mm) ej: 9"
                 :rules="suprailiacRules"
                 hide-details="auto"
                 v-model="suprailiac"
@@ -78,7 +78,7 @@
 
               <!-- Suprailiac -->
               <v-text-field
-                label="Pliege subescapular (mm)"
+                label="Pliege subescapular (mm) ej: 8"
                 :rules="suprailiacRules"
                 hide-details="auto"
                 v-model="subscapular"
