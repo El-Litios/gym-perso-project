@@ -39,7 +39,8 @@
                             <h4><b>Situación:</b> {{setInterval(item.imc)}}</h4>
                         </div>
                         <div class="d-flex justify-space-around mb-6">
-                            <h4><b>Masa muscular:</b> {{item.averagemass}}</h4>
+                            <h4><b>Masa:</b> {{Number(item.averagemass.toFixed(2))}}</h4>
+                            <h4><b>Grasa:</b> {{item.amountfat}}</h4>
                             <h4 v-if="student.gender === 'Femenino'"><b>Cintura/Caderas:</b> {{item.waisthip}}</h4>
                         </div>
                     </v-card-subtitle>
