@@ -82,6 +82,7 @@ export const createNewChange = async({commit, rootState}, obj) => {
             averagefat: obj.averagefat,
             averagemass: obj.averagemass,
             imc: obj.imc,
+            amountfat: obj.amountfat,
             waisthip: obj.waist + '/' + obj.hip 
         }
     }else {
@@ -91,6 +92,7 @@ export const createNewChange = async({commit, rootState}, obj) => {
             changedate: obj.changedate,
             averagefat: obj.averagefat,
             averagemass: obj.averagemass,
+            amountfat: obj.amountfat,
             imc: obj.imc,
         }
     }
