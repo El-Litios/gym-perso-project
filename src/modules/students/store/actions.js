@@ -73,13 +73,28 @@ export const getDetails = async({commit , rootState}, id) => {
 }
 
 export const createNewChange = async({commit, rootState}, obj) => {
-    await db.collection(`${rootState.auth.user}/Userdata/students/${obj.idStudent}/changes`).add({
-        weight: obj.weight,
-        height: obj.height,
-        changedate: obj.changedate,
-        averagefat: obj.averagefat,
-        imc: obj.imc,
-    })
+    let dataObj
+    if (obj.waist && obj.hip) {
+        dataObj = {
+            weight: obj.weight,
+            height: obj.height,
+            changedate: obj.changedate,
+            averagefat: obj.averagefat,
+            averagemass: obj.averagemass,
+            imc: obj.imc,
+            waisthip: obj.waist + '/' + obj.hip 
+        }
+    }else {
+        dataObj = {
+            weight: obj.weight,
+            height: obj.height,
+            changedate: obj.changedate,
+            averagefat: obj.averagefat,
+            averagemass: obj.averagemass,
+            imc: obj.imc,
+        }
+    }
+    await db.collection(`${rootState.auth.user}/Userdata/students/${obj.idStudent}/changes`).add(dataObj)
     .then(() => {
         router.go()
     })
