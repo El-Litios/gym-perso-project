@@ -76,7 +76,7 @@
                 step=".1"
               ></v-text-field>
 
-              <!-- Suprailiac -->
+              <!-- Subscapular -->
               <v-text-field
                 label="Pliege subescapular (mm) ej: 8"
                 :rules="suprailiacRules"
@@ -85,6 +85,28 @@
                 type="number"
                 step=".1"
               ></v-text-field>
+
+              <div v-if="gender === 'Femenino'">
+                <!-- Hip -->
+                <v-text-field
+                  label="Caderas (mm) ej: 5"
+                  :rules="hipRules"
+                  hide-details="auto"
+                  v-model="changes.hip"
+                  type="number"
+                  step=".1"
+                ></v-text-field>
+
+                <!-- Waist -->
+                <v-text-field
+                  label="Cintura (mm) ej: 5"
+                  :rules="waistRules"
+                  hide-details="auto"
+                  v-model="changes.waist"
+                  type="number"
+                  step=".1"
+                ></v-text-field>
+              </div>
               
               <!-- Change Date -->
               <v-text-field
@@ -169,6 +191,12 @@ export default {
           suprailiacRules: [
             value => !!value || 'Debe ingresar el pliege del suprailiaco.',
           ],
+          hipRules: [
+            value => !!value || 'Debe ingresar el pliege de las caderas.',
+          ],
+          waistRules: [
+            value => !!value || 'Debe ingresar el pliege de la cintura.',
+          ],
     }
   },
 
@@ -186,9 +214,13 @@ export default {
       const sum = parseFloat(this.biceps) + parseFloat(this.triceps) + parseFloat(this.subscapular) + parseFloat(this.suprailiac)
       const corporalDensity = C - (M * Math.log10(sum))
       const averageFat = (495 / corporalDensity) - 450
+      const averageMass = ((Math.round(averageFat) / 100 ) * this.changes.weight) 
+
       this.changes.imc = Number(imc.toFixed(2));
       this.changes.averagefat = Math.round(averageFat)
+      this.changes.averagemass = this.changes.weight - averageMass
       this.changes.idStudent = this.idStudent
+      
       
       this.createNewChange(this.changes)
     }
