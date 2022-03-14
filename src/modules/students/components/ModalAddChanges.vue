@@ -214,11 +214,12 @@ export default {
       const sum = parseFloat(this.biceps) + parseFloat(this.triceps) + parseFloat(this.subscapular) + parseFloat(this.suprailiac)
       const corporalDensity = C - (M * Math.log10(sum))
       const averageFat = (495 / corporalDensity) - 450
-      const averageMass = ((Math.round(averageFat) / 100 ) * this.changes.weight) 
+      const amountFat = ((Math.round(averageFat) / 100 ) * this.changes.weight) 
 
       this.changes.imc = Number(imc.toFixed(2));
       this.changes.averagefat = Math.round(averageFat)
-      this.changes.averagemass = this.changes.weight - averageMass
+      this.changes.averagemass = this.changes.weight - amountFat
+      this.changes.amountfat = Number(amountFat.toFixed(2))
       this.changes.idStudent = this.idStudent
       
       
