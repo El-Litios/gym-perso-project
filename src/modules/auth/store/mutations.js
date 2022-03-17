@@ -1,3 +1,3 @@
-/* export const Actions =  (state) => {
-    do mutations
-} */
+export const setUserInfoFromLogin =  (state, payload) => {
+    state.user = payload
+}

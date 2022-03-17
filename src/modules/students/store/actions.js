@@ -4,7 +4,7 @@ import router from '../../../router'
 
 export const getStudents = async ({commit,  rootState}) => {
     const students = []
-    await db.collection(`${rootState.auth.user}/Userdata/students`).get()
+    await db.collection(`${rootState.auth.user.id}/Userdata/students`).get()
         .then(res => {
             res.forEach(doc => {
                 let data = doc.data()
@@ -17,7 +17,7 @@ export const getStudents = async ({commit,  rootState}) => {
 } 
 
 export const getStudentById = async ({commit, rootState}, id) => {
-    await db.collection(`${rootState.auth.user}/Userdata/students`).doc(id).get()
+    await db.collection(`${rootState.auth.user.id}/Userdata/students`).doc(id).get()
         .then(res => {
             const student = {
                 rut: res.data().rut,
@@ -35,7 +35,7 @@ export const getStudentById = async ({commit, rootState}, id) => {
 
 
 export const createStudent = async ({rootState}, student) => {
-    await db.collection(`${rootState.auth.user}/Userdata/students`).add({
+    await db.collection(`${rootState.auth.user.id}/Userdata/students`).add({
         rut: student.rut,
         name: student.name,
         fatherLastName: student.flname,
@@ -45,13 +45,13 @@ export const createStudent = async ({rootState}, student) => {
         gender: student.gender
     })
     .then(() => {
-        router.go()
+        router.push({ name: 'StudentsList' }).catch(err => {})
     })
     .catch(err => console.log(err))
 }
 
 export const deleteStudent = async({commit, rootState}, id) => {
-    await db.collection(`${rootState.auth.user}/Userdata/students`).doc(id).delete()
+    await db.collection(`${rootState.auth.user.id}/Userdata/students`).doc(id).delete()
     .then(() => {
         commit('unsetStudentAfterDelete', id)
     })
@@ -60,7 +60,7 @@ export const deleteStudent = async({commit, rootState}, id) => {
 
 export const getDetails = async({commit , rootState}, id) => {
     const details = []
-    await db.collection(`${rootState.auth.user}/Userdata/students/${id}/changes`).orderBy("changedate","desc").get()
+    await db.collection(`${rootState.auth.user.id}/Userdata/students/${id}/changes`).orderBy("changedate","desc").get()
     .then(res => {
         res.forEach(doc => {
             let data = doc.data()
@@ -96,7 +96,7 @@ export const createNewChange = async({commit, rootState}, obj) => {
             imc: obj.imc,
         }
     }
-    await db.collection(`${rootState.auth.user}/Userdata/students/${obj.idStudent}/changes`).add(dataObj)
+    await db.collection(`${rootState.auth.user.id}/Userdata/students/${obj.idStudent}/changes`).add(dataObj)
     .then(() => {
         router.go()
     })
@@ -105,7 +105,7 @@ export const createNewChange = async({commit, rootState}, obj) => {
 }
 
 export const deleteChange = async({commit, rootState}, obj) => {
-    await db.collection(`${rootState.auth.user}/Userdata/students/${obj.idStudent}/changes`).doc(obj.idChange).delete()
+    await db.collection(`${rootState.auth.user.id}/Userdata/students/${obj.idStudent}/changes`).doc(obj.idChange).delete()
     .then(() => {
         commit('unsetCahngeAfterDelete', obj.idChange)
     })
