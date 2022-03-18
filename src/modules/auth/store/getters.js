@@ -1,3 +1,7 @@
-/* export const Getters =  (state) => {
-    return state.something
-} */
+export const userExists =  (state) => {
+    if(state.user === null){
+        return false
+    }else{
+        return true
+    }
+} 
