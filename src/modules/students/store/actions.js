@@ -45,7 +45,7 @@ export const createStudent = async ({rootState}, student) => {
         gender: student.gender
     })
     .then(() => {
-        router.push({ name: 'StudentsList' }).catch(err => {})
+        router.go()
     })
     .catch(err => console.log(err))
 }
