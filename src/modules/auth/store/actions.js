@@ -13,7 +13,22 @@ export const loginUser = async ({commit}, userObj) => {
         })
         .catch(err => {
             console.log(err)
-            /* const message = 'No existe'
-            commit('setErrorFromLogin', message) */
+            
         })
 } 
+
+
+export const detectUser = ({commit}, userobj) => {
+    commit('setUserInfoFromLogin', userobj)
+}
+
+export const logoutUser = () => {
+     authen.signOut()
+        .then(() => {
+            router.push('/')
+            router.go()
+    })
+        .catch(err => {
+          console.log(err);
+    })
+}
