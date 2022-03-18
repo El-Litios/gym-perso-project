@@ -34,8 +34,8 @@ import { mapActions } from 'vuex'
 
 export default {
     components: {
-        Navbar: () => import('../components/Navbar.vue'),
-        Footer: () => import('../components/Footer.vue'),
+        Navbar: () => import('../../../components/Navbar.vue'),
+        Footer: () => import('../../../components/Footer.vue'),
     },
 
     data(){

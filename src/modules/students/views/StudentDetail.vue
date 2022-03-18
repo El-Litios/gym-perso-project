@@ -77,8 +77,8 @@ export default {
     },
 
     components: {
-        Navbar: () => import('../components/Navbar.vue'),
-        Footer: () => import('../components/Footer.vue'),
+        Navbar: () => import('../../../components/Navbar.vue'),
+        Footer: () => import('../../../components/Footer.vue'),
         Modal: () => import('../components/ModalAddChanges.vue'),
         ModalTable: () => import('../components/ModalShowTable.vue'),
     },
