@@ -13,8 +13,9 @@
         </div>
 
         <div class="d-flex justify-center mb-6">
-            <Modal :idStudent="id" :age="setAgeFromDate" :gender="student.gender"/> ||| 
-            <ModalTable :gender="student.gender"/>
+            <ModalDurnin :idStudent="id" :age="setAgeFromDate" :gender="student.gender"/> ||| 
+            <ModalTable :gender="student.gender"/> |||
+            <ModalFaulker/>
         </div>
 
         <br>
@@ -79,7 +80,8 @@ export default {
     components: {
         Navbar: () => import('../../../components/Navbar.vue'),
         Footer: () => import('../../../components/Footer.vue'),
-        Modal: () => import('../components/ModalAddChanges.vue'),
+        ModalDurnin: () => import('../components/ModalAddDurnin.vue'),
+        ModalFaulker: () => import('../components/ModalAddFaulker.vue'),
         ModalTable: () => import('../components/ModalShowTable.vue'),
     },
 
