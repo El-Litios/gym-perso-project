@@ -11,13 +11,13 @@
             v-bind="attrs"
             v-on="on"
           >
-            Agregar
+            Agregar Durnin
           </v-btn>
         </template>
 
         <v-card>
           <v-card-title class="text-h5 white lighten-2">
-            Formulario
+            Formulario Durnin
           </v-card-title>
 
           <v-form @submit.prevent="saveChange()" lazy-validation ref="form" v-model="valid">
