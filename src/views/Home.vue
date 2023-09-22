@@ -5,7 +5,7 @@
     <v-container>
       <v-row>
         <v-col cols="12"  align="center" justify="center">
-          <v-img src="../assets/evolutiongym.jpg" max-width="400" max-height="400">
+          <v-img src="../assets/LogoHome.jpg" max-width="800" max-height="800">
           </v-img>
         </v-col>
         <v-col cols="12" align="center" justify="center">
