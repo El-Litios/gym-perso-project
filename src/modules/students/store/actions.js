@@ -83,7 +83,42 @@ export const createNewDurninChange = async({commit, rootState}, obj) => {
             averagemass: obj.averagemass,
             imc: obj.imc,
             amountfat: obj.amountfat,
-            waisthip: obj.waist + '/' + obj.hip 
+            waisthip: obj.waist + '/' + obj.hip, 
+            category: obj.category 
+        }
+    }else {
+        dataObj = {
+            weight: obj.weight,
+            height: obj.height,
+            changedate: obj.changedate,
+            averagefat: obj.averagefat,
+            averagemass: obj.averagemass,
+            amountfat: obj.amountfat,
+            imc: obj.imc, 
+            category: obj.category
+        }
+    }
+    await db.collection(`${rootState.auth.user.id}/Userdata/students/${obj.idStudent}/changes`).add(dataObj)
+    .then(() => {
+        router.go()
+    })
+    .catch(err => console.log(err))
+    
+}
+
+export const createNewFaulkerChange = async({commit, rootState}, obj) => {
+    let dataObj
+    if (obj.waist && obj.hip) {
+        dataObj = {
+            weight: obj.weight,
+            height: obj.height,
+            changedate: obj.changedate,
+            averagefat: obj.averagefat,
+            averagemass: obj.averagemass,
+            imc: obj.imc,
+            amountfat: obj.amountfat,
+            waisthip: obj.waist + '/' + obj.hip, 
+            category: obj.category
         }
     }else {
         dataObj = {
@@ -94,6 +129,7 @@ export const createNewDurninChange = async({commit, rootState}, obj) => {
             averagemass: obj.averagemass,
             amountfat: obj.amountfat,
             imc: obj.imc,
+            category: obj.category
         }
     }
     await db.collection(`${rootState.auth.user.id}/Userdata/students/${obj.idStudent}/changes`).add(dataObj)
