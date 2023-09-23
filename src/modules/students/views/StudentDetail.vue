@@ -14,8 +14,8 @@
 
         <div class="d-flex justify-center mb-6">
             <ModalDurnin :idStudent="id" :age="setAgeFromDate" :gender="student.gender"/> ||| 
-            <ModalTable :gender="student.gender"/> |||
-            <ModalFaulker/>
+            <ModalTable /> |||
+            <ModalFaulker :idStudent="id" :age="setAgeFromDate" :gender="student.gender"/>
         </div>
 
         <br>
@@ -25,8 +25,12 @@
                     color="grey lighten-5"
                     elevation="11"
                 >
-                    <v-card-title class="text-h6 text-center">
-                        Fecha: {{item.changedate}}
+                    <v-card-title class="text-h6 text-center" v-if="item.category == null || item.category == 'Durnin'">
+                       Durnin Fecha: {{item.changedate}}
+                    </v-card-title>
+                    <v-card-title class="text-h6 text-center" v-else>
+                       
+                       Faulker Fecha: {{item.changedate}}
                     </v-card-title>
                         
                     <v-card-subtitle class="text-center">
