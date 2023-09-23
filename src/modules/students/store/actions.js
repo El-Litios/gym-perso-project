@@ -72,7 +72,7 @@ export const getDetails = async({commit , rootState}, id) => {
     .catch(err => console.log(err))
 }
 
-export const createNewChange = async({commit, rootState}, obj) => {
+export const createNewDurninChange = async({commit, rootState}, obj) => {
     let dataObj
     if (obj.waist && obj.hip) {
         dataObj = {

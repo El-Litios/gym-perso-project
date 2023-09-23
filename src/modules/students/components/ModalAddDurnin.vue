@@ -201,7 +201,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('students', ['createNewChange']),
+    ...mapActions('students', ['createNewDurninChange']),
 
     validate () {
       this.$refs.form.validate()
@@ -223,7 +223,7 @@ export default {
       this.changes.idStudent = this.idStudent
       
       
-      this.createNewChange(this.changes)
+      this.createNewDurninChange(this.changes)
     }
 
   },
