@@ -46,12 +46,12 @@
                 ></v-text-field>
   
                
-                <!-- Biceps -->
+                <!-- Abdomen -->
                 <v-text-field
-                  label="Pliege biceps (mm) ej: 3.5"
-                  :rules="bicepsRules"
+                  label="Pliege Abdomen (mm) ej: 3.5"
+                  :rules="AbdomenRules"
                   hide-details="auto"
-                  v-model="biceps"
+                  v-model="abdominal"
                   type="number"
                   step=".1"
                 ></v-text-field>
@@ -142,7 +142,7 @@
   
   <script>
   import { mapActions } from 'vuex'
-  import getDurninConstants from '../helpers/getDurninConstants'
+  import getFaulkerConstants from '../helpers/getFaulkerConstants'
   
   export default {
     props: {
@@ -164,7 +164,7 @@
             dialog: false,    
             valid: true,
             changes: {},
-            biceps: null,
+            abdominal: null,
             triceps: null,
             suprailiac: null,
             subscapular: null,
@@ -179,8 +179,8 @@
             cdRules: [
               value => !!value || 'Debe ingresar la fecha.',
             ],
-            bicepsRules: [
-              value => !!value || 'Debe ingresar el pliege de biceps.',
+            AbdomenRules: [
+              value => !!value || 'Debe ingresar el pliege de abdomen.',
             ],
             tricepsRules: [
               value => !!value || 'Debe ingresar el pliege de triceps.',
@@ -201,7 +201,7 @@
     },
   
     methods: {
-      ...mapActions('students', ['createNewChange']),
+      ...mapActions('students', ['createNewFaulkerChange']),
   
       validate () {
         this.$refs.form.validate()
@@ -209,27 +209,27 @@
   
       saveFaulkerChange(){
         const imc = this.changes.weight / (this.changes.height * this.changes.height)
-        const C = this.setDurninConstants.constantC
-        const M = this.setDurninConstants.constantM
-        const sum = parseFloat(this.biceps) + parseFloat(this.triceps) + parseFloat(this.subscapular) + parseFloat(this.suprailiac)
-        const corporalDensity = C - (M * Math.log10(sum))
-        const averageFat = (495 / corporalDensity) - 450
-        const amountFat = ((Math.round(averageFat) / 100 ) * this.changes.weight) 
+        const Constant1 = this.setFaulkerConstants.constant_1
+        const Constant2 = this.setFaulkerConstants.constant_2
+        const sum = parseFloat(this.abdominal) + parseFloat(this.triceps) + parseFloat(this.subscapular) + parseFloat(this.suprailiac)
+        const amountFatFaulker = sum * Constant1 + Constant2
+        console.log(amountFatFaulker);
   
         this.changes.imc = Number(imc.toFixed(2));
-        this.changes.averagefat = Math.round(averageFat)
-        this.changes.averagemass = this.changes.weight - amountFat
-        this.changes.amountfat = Number(amountFat.toFixed(2))
+        this.changes.averagefat = Number(amountFatFaulker.toFixed(2))
+        this.changes.averagemass = this.changes.weight - this.changes.averagefat
+        this.changes.amountfat = (amountFatFaulker * this.changes.weight)/100
         this.changes.idStudent = this.idStudent
+        this.changes.category = 'Faulkner'
         
-        
-        this.createNewChange(this.changes)
+        console.log(this.changes);
+        this.createNewFaulkerChange(this.changes)
       }
   
     },
     computed: {
-      setDurninConstants(){
-        const constants =  getDurninConstants(this.gender, this.age)
+      setFaulkerConstants(){
+        const constants =  getFaulkerConstants(this.gender, this.age)
         
         return constants
       }
