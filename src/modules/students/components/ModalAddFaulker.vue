@@ -20,7 +20,7 @@
               Formulario Faulker
             </v-card-title>
   
-            <v-form @submit.prevent="saveChange()" lazy-validation ref="form" v-model="valid">
+            <v-form @submit.prevent="saveFaulkerChange()" lazy-validation ref="form" v-model="valid">
   
               <v-card-text>
               
@@ -207,7 +207,7 @@
         this.$refs.form.validate()
       },
   
-      saveChange(){
+      saveFaulkerChange(){
         const imc = this.changes.weight / (this.changes.height * this.changes.height)
         const C = this.setDurninConstants.constantC
         const M = this.setDurninConstants.constantM
