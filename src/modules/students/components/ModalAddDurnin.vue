@@ -221,7 +221,7 @@ export default {
       this.changes.averagemass = this.changes.weight - amountFat
       this.changes.amountfat = Number(amountFat.toFixed(2))
       this.changes.idStudent = this.idStudent
-      
+      this.changes.category = 'Durnin'
       
       this.createNewDurninChange(this.changes)
     }
