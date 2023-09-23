@@ -20,7 +20,7 @@
             Formulario Durnin
           </v-card-title>
 
-          <v-form @submit.prevent="saveChange()" lazy-validation ref="form" v-model="valid">
+          <v-form @submit.prevent="saveDurninChange()" lazy-validation ref="form" v-model="valid">
 
             <v-card-text>
             
@@ -207,7 +207,7 @@ export default {
       this.$refs.form.validate()
     },
 
-    saveChange(){
+    saveDurninChange(){
       const imc = this.changes.weight / (this.changes.height * this.changes.height)
       const C = this.setDurninConstants.constantC
       const M = this.setDurninConstants.constantM
