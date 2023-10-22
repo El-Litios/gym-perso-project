@@ -6,6 +6,19 @@
 
         <Modal/>
 
+        <v-container>
+            <v-responsive
+                class="mx-auto"
+                max-width="300"
+            >
+                <v-text-field
+                placeholder="Buscador"
+                type="input"
+                hint="Escribe para encontrar lo que buscas."
+                v-model="term"
+                ></v-text-field>
+            </v-responsive>
+        </v-container>
 
         <v-simple-table>
             <template v-slot:default>
@@ -25,7 +38,7 @@
                 </thead>
                 <tbody>
                     <tr
-                    v-for="item in students"
+                    v-for="item in searchStudentByTerm"
                     :key="item.id"
                     >
                         <td class="text-center">{{ item.rut }}</td>
@@ -45,7 +58,7 @@
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex'
+import {mapActions, mapState, mapGetters} from 'vuex'
 import Swal from 'sweetalert2'
 
 export default {
@@ -55,12 +68,23 @@ export default {
         Modal: () => import('../components/ModalAddStudent.vue'),
     },
 
+    data () {
+        return {
+            term: ''
+        }
+    },
+
     created() {
         this.getStudents()
     },
 
     computed: {
-        ...mapState('students', ['students'])
+        ...mapState('students', ['students']),
+        ...mapGetters('students', ['getStudentsByTerm']),
+
+        searchStudentByTerm(){
+            return this.getStudentsByTerm(this.term)
+        }
     },
 
     methods: {
