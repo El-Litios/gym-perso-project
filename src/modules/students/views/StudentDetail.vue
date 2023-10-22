@@ -14,7 +14,7 @@
 
         <div class="d-flex justify-center mb-6">
             <ModalDurnin :idStudent="id" :age="setAgeFromDate" :gender="student.gender"/> ||| 
-            <ModalTable /> |||
+            <ModalTable :gender="student.gender" /> |||
             <ModalFaulker :idStudent="id" :age="setAgeFromDate" :gender="student.gender"/>
         </div>
 
