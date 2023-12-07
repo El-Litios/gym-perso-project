@@ -10,7 +10,7 @@ const getDurninConstants = (gender, age) => {
             }
 
             //20-29 years old
-          case age >=20 && age <=28:
+          case age >=20 && age <=29:
              
             return {
                 constantC: 1.1631,
@@ -53,7 +53,7 @@ const getDurninConstants = (gender, age) => {
             }
 
             //20-29 years old
-          case age >=20 && age <=28:
+          case age >=20 && age <=29:
              
             return {
                 constantC: 1.1599,
