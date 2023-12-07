@@ -41,7 +41,6 @@
 export default {
     props: {
         gender: {
-            type: String,
             required: true
         }
     },
