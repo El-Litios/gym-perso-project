@@ -207,24 +207,22 @@
         this.$refs.form.validate()
       },
   
-      saveFaulkerChange(){
-        const imc = this.changes.weight / (this.changes.height * this.changes.height)
-        const Constant1 = this.setFaulkerConstants.constant_1
-        const Constant2 = this.setFaulkerConstants.constant_2
-        const sum = parseFloat(this.abdominal) + parseFloat(this.triceps) + parseFloat(this.subscapular) + parseFloat(this.suprailiac)
-        const amountFatFaulker = sum * Constant1 + Constant2
-        console.log(amountFatFaulker);
-  
-        this.changes.imc = Number(imc.toFixed(2));
-        this.changes.averagefat = Number(amountFatFaulker.toFixed(2))
-        this.changes.averagemass = this.changes.weight - this.changes.averagefat
-        this.changes.amountfat = (amountFatFaulker * this.changes.weight)/100
-        this.changes.idStudent = this.idStudent
-        this.changes.category = 'Faulkner'
-        
-        console.log(this.changes);
-        this.createNewFaulkerChange(this.changes)
-      }
+      saveFaulkerChange() {
+    const imc = this.changes.weight / (this.changes.height * this.changes.height);
+    const constants = this.setFaulkerConstants;
+    const sum = parseFloat(this.abdominal) + parseFloat(this.triceps) + parseFloat(this.subescapular) + parseFloat(this.suprailiac);
+    const amountFatFaulker = sum * constants.constant_1 + constants.constant_2;
+
+    this.changes.imc = Number(imc.toFixed(2));
+    this.changes.averagefat = Number(amountFatFaulker.toFixed(2));
+    this.changes.averagemass = this.changes.weight - (this.changes.weight * amountFatFaulker / 100);
+    this.changes.amountfat = (amountFatFaulker * this.changes.weight) / 100;
+    this.changes.idStudent = this.idStudent;
+    this.changes.category = 'Faulkner';
+
+    this.createNewFaulkerChange(this.changes);
+}
+
   
     },
     computed: {
