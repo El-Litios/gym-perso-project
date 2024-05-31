@@ -207,6 +207,7 @@
         this.$refs.form.validate()
       },
   
+<<<<<<< HEAD
       async saveFaulkerChange(){
         const imc = this.changes.weight / (this.changes.height * this.changes.height)
         const Constant1 = this.setFaulkerConstants.constant_1
@@ -224,6 +225,24 @@
         
         await this.createNewFaulkerChange(this.changes)
       }
+=======
+      saveFaulkerChange() {
+    const imc = this.changes.weight / (this.changes.height * this.changes.height);
+    const constants = this.setFaulkerConstants;
+    const sum = parseFloat(this.abdominal) + parseFloat(this.triceps) + parseFloat(this.subescapular) + parseFloat(this.suprailiac);
+    const amountFatFaulker = sum * constants.constant_1 + constants.constant_2;
+
+    this.changes.imc = Number(imc.toFixed(2));
+    this.changes.averagefat = Number(amountFatFaulker.toFixed(2));
+    this.changes.averagemass = this.changes.weight - (this.changes.weight * amountFatFaulker / 100);
+    this.changes.amountfat = (amountFatFaulker * this.changes.weight) / 100;
+    this.changes.idStudent = this.idStudent;
+    this.changes.category = 'Faulkner';
+
+    this.createNewFaulkerChange(this.changes);
+}
+
+>>>>>>> 01a6bb3f1291f61c517e07ae0a90a8eb2f1cecd0
   
     },
     computed: {
